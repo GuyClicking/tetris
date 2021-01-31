@@ -1,4 +1,4 @@
-LIBS=-lncurses
+LIBS=-lncurses -ltinfo
 
 FUNNYFLAGS=-DCOL_256 -DHOLD -DSRS -DSEVEN_BAG
 
