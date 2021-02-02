@@ -8,8 +8,8 @@ int collision(Board *board) {
 		Point offset = location_map[board->piece][board->rotation][i];
 		char x = board->piece_point.x - offset.x,
 			 y = board->piece_point.y - offset.y;
-		if  (x < 0 || x >= 10 ||
-			(y > 0 && board->board[x][y] != NONE)) return 1;
+		if  (x < 0 || x >= 10 || y >= 20 ||
+			(y > 0 && board->board[y][x] != NONE)) return 1;
 	}
 	
 	return 0;
@@ -36,6 +36,10 @@ void hard_drop(Board *board) {
 		Point offset = location_map[board->piece][board->rotation][i];
 		char x = board->piece_point.x - offset.x,
 			 y = board->piece_point.y - offset.y;
-		board->board[x][y] = (Mino)board->piece;
+		board->board[y][x] = (Mino)board->piece;
 	}
+	board->piece = I;
+	board->rotation = 0;
+	board->piece_point.x = 5;
+	board->piece_point.y = 0;
 }
