@@ -80,10 +80,9 @@ int move_piece(Board *board, Direction dir) {
 void hard_drop(Board *board) {
 	int i;
 
-	while (!collision(board)) {
-		board->piece_point.y++;
-	}
+	do board->piece_point.y++; while (!collision(board));
 	board->piece_point.y--;
+
 	for (i = 0; i < 4; i++) {
 		Point offset = location_map[board->piece][board->rotation][i];
 		char x = board->piece_point.x - offset.x,
