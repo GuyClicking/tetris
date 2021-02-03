@@ -86,7 +86,7 @@ void draw(Board *board) {
 			Point offset = location_map[p][0][j];
 			char x = offset.x,
 				 y = offset.y;
-			mvprintw(y + (i*4) + (LINES/2 - 20/2), x*2 + 24 + (COLS/2 - 10), "  ");
+			mvprintw(y + (i%6*4) + (LINES/2 - 20/2), x*2 + 26 + (6*i/6)/*round*/ + (COLS/2 - 10), "  ");
 		}
 		attroff(COLOR_PAIR(p));
 	}
