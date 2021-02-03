@@ -13,7 +13,11 @@ int main(int argc, char ** argv) {
 	for (int col = 0; col < 10; col++)
         board.board[row][col] = EMPTY;
 
-	board.piece = I;
+	board.bag_left = 0;
+
+	init_queue(&board);
+
+	next_piece(&board);
 	board.rotation = 0;
 	board.piece_point.x = 5;
 	board.piece_point.y = 0;
@@ -36,5 +40,8 @@ int main(int argc, char ** argv) {
 	}
 quit:
 	endwin();
+	printf("%d\n",board.piece);
+	for (int i = 0; i < 5; i++)
+		printf("%d\n",board.queue[(board.queue_index+i)%7]);
 	return 0;
 }

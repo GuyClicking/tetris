@@ -1,5 +1,56 @@
+#include <stdlib.h>
+
 #include "board.h"
 #include "move.h"
+
+void init_queue(Board *board) {
+	// bad code
+	int i,n;
+	for (i = 0; i < 5; i++) {
+		board->queue_index %= 7;
+		if (board->bag_left == 0) {
+			int i,n;
+			for (i = 0; i < 7; i++)
+				board->bag[i]=1;
+			n = rand()%7;
+			board->bag[n] = 0;
+			board->queue[i] = n + 1;
+			board->queue_index++;
+			board->bag_left = 6;
+			continue;
+		}
+		do {
+			n = rand() % 7;
+		} while (!board->bag[n]);
+		board->bag[n] = 0;
+		board->queue[i] = n+1;
+		board->bag_left--;
+		board->queue_index++;
+	}
+}
+
+void next_piece(Board *board) {
+	if (board->bag_left == 0) {
+		int i,n;
+		for (i = 0; i < 7; i++)
+			board->bag[i]=1;
+		n = rand()%7;
+		board->bag[n] = 0;
+		board->piece = board->queue[board->queue_index];
+		board->queue[board->queue_index++] = n + 1;
+		board->bag_left = 6;
+		return;
+	}
+	int n;
+	do {
+		n = rand() % 7;
+	} while (!board->bag[n]);
+	board->bag[n] = 0;
+	board->piece = board->queue[board->queue_index];
+	board->queue[board->queue_index++] = n + 1;
+	board->queue_index %= 7;
+	board->bag_left--;
+}
 
 int collision(Board *board) {
 	int i;
@@ -38,7 +89,7 @@ void hard_drop(Board *board) {
 			 y = board->piece_point.y - offset.y;
 		board->board[y][x] = (Mino)board->piece;
 	}
-	board->piece = I;
+	next_piece(board);
 	board->rotation = 0;
 	board->piece_point.x = 5;
 	board->piece_point.y = 0;
