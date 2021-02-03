@@ -42,6 +42,6 @@ quit:
 	endwin();
 	printf("%d\n",board.piece);
 	for (int i = 0; i < 5; i++)
-		printf("%d\n",board.queue[(board.queue_index+i)%7]);
+		printf("%d\n",board.queue[(board.queue_index+i)%5]);
 	return 0;
 }
