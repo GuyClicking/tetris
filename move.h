@@ -9,4 +9,5 @@ typedef enum {
 void init_queue(Board *board);
 void next_piece(Board *board);
 int move_piece(Board *board, Direction dir);
+int rotate_piece(Board *board, Direction dir);
 void hard_drop(Board *board);

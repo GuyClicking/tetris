@@ -33,6 +33,12 @@ int main(int argc, char ** argv) {
 			case 'k':
 				move_piece(&board, RIGHT);
 				break;
+			case 's':
+				rotate_piece(&board, LEFT);
+				break;
+			case 'd':
+				rotate_piece(&board, RIGHT);
+				break;
 			case 'j':
 				hard_drop(&board);
 				break;

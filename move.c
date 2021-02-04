@@ -63,6 +63,20 @@ int collision(Board *board) {
 	return 0;
 }
 
+int rotate_piece(Board *board, Direction dir) {
+	const int table[2] = {-1,1};
+	board->rotation += 4;
+	board->rotation += table[dir];
+	board->rotation %= 4;
+	if (collision(board)) {
+		board->rotation += 4;
+		board->rotation -= table[dir];
+		board->rotation %= 4;
+		return 1;
+	}
+	return 0;
+}
+
 int move_piece(Board *board, Direction dir) {
 	const int table[2] = {-1,1};
 	board->piece_point.x += table[dir];
