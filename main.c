@@ -1,10 +1,15 @@
 #include <ncurses.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "board.h"
 #include "draw.h"
 #include "move.h"
 
 int main(int argc, char ** argv) {
+	time_t t;
+	srand((unsigned)time(&t));
+
 	init_ncurses();
 
 	Board board;
@@ -27,10 +32,10 @@ int main(int argc, char ** argv) {
 		switch(getch()) {
 			case 'q':
 				goto quit;
-			case 'h':
+			case 'j':
 				move_piece(&board, LEFT);
 				break;
-			case 'k':
+			case 'l':
 				move_piece(&board, RIGHT);
 				break;
 			case 's':
@@ -39,7 +44,7 @@ int main(int argc, char ** argv) {
 			case 'd':
 				rotate_piece(&board, RIGHT);
 				break;
-			case 'j':
+			case 'k':
 				hard_drop(&board);
 				break;
 		}
