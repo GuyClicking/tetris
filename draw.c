@@ -74,17 +74,20 @@ void draw(Board *board) {
 
 	for (i = 0; i < 4; i++) {
 		Point offset = location_map[board->piece][board->rotation][i];
-		char x = board->piece_point.x - offset.x,
+		signed char x = board->piece_point.x - offset.x,
 			 y = board->piece_point.y - offset.y;
 		mvprintw(y + (LINES/2 - 20/2), x*2 + (COLS/2 - 10), "  ");
 	}
 	attroff(COLOR_PAIR(board->piece));
+	for (row = 0; row < 30; row++)
+	for (col = 0; col < 30; col++)
+		mvaddch(-1 + row + (LINES/2 - 20/2), 22 + col + (COLS/2 - 10), ' ');
 	for (i = 0; i < 5; i++) {
 		Piece p = board->queue[(board->queue_index + i)%5];
 		attron(COLOR_PAIR(p));
 		for (j = 0; j < 4; j++) {
-			Point offset = location_map[p][0][j];
-			char x = offset.x,
+			Point offset = location_map[p][2][j];
+			signed char x = offset.x,
 				 y = offset.y;
 			mvprintw(y + (i%6*4) + (LINES/2 - 20/2), x*2 + 26 + (6*i/6)/*round*/ + (COLS/2 - 10), "  ");
 		}

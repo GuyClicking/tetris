@@ -19,9 +19,7 @@ void init_queue(Board *board) {
 			board->bag_left = 6;
 			continue;
 		}
-		do {
-			n = rand() % 7;
-		} while (!board->bag[n]);
+		do {n = rand() % 7;} while (!board->bag[n]);
 		board->bag[n] = 0;
 		board->queue[i] = n+1;
 		board->bag_left--;
@@ -43,9 +41,7 @@ void next_piece(Board *board) {
 		return;
 	}
 	int n;
-	do {
-		n = rand() % 7;
-	} while (!board->bag[n]);
+	do {n = rand() % 7;} while (!board->bag[n]);
 	board->bag[n] = 0;
 	board->piece = board->queue[board->queue_index];
 	board->queue[board->queue_index++] = n + 1;
@@ -58,7 +54,7 @@ int collision(Board *board) {
 
 	for (i = 0; i < 4; i++) {
 		Point offset = location_map[board->piece][board->rotation][i];
-		char x = board->piece_point.x - offset.x,
+		signed char x = board->piece_point.x - offset.x,
 			 y = board->piece_point.y - offset.y;
 		if  (x < 0 || x >= 10 || y >= 20 ||
 			(y > 0 && board->board[y][x] != NONE)) return 1;
@@ -80,7 +76,7 @@ int move_piece(Board *board, Direction dir) {
 void hard_drop(Board *board) {
 	int i;
 
-	do board->piece_point.y++; while (!collision(board));
+	do {board->piece_point.y++;} while (!collision(board));
 	board->piece_point.y--;
 
 	for (i = 0; i < 4; i++) {

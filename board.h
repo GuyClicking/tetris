@@ -11,7 +11,7 @@ typedef enum {
 } Mino;
 
 typedef struct {
-	char x,y;
+	signed char x,y;
 } Point;
 
 typedef struct {
